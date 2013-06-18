@@ -1,0 +1,26 @@
+User-agent: *
+Disallow: /8html-qnn/
+Disallow: /cpsm/
+Disallow: /data/
+Disallow: /enterprise/
+Disallow: /geren/
+Disallow: /image-news/
+Disallow: /image-pro/
+Disallow: /image-videos/
+Disallow: /images/
+Disallow: /include/
+Disallow: /logreport/
+Disallow: /personal/
+Disallow: /plus/
+Disallow: /qiye/
+Disallow: /stores/
+Disallow: /survey/
+Disallow: /templets/
+Disallow: /uploads/
+Disallow: /bdsitemap.txt
+Disallow: /favicon.ico
+Disallow: /stores.json
+Disallow: /survey.php
+Disallow: /tags.php
+
+Sitemap: http://www.qnn.com.cn/Sitemap.xml
