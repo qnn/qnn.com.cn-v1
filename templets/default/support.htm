@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie6"><![endif]-->
+<!--[if IE 7 ]><html class="ie7"><![endif]-->
+<!--[if IE 8 ]><html class="ie8"><![endif]-->
+<!--[if IE 9 ]><html class="ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html><!--<![endif]-->
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<title>{dede:field.title/}-全能保险柜官网</title>
+<meta name="viewport" content="width=device-width, initial-scale=0.75" />
+<meta name="keywords" content="{dede:field.keywords/}" />
+<meta name="description" content="{dede:field.description/}" />
+<link href="{dede:global.cfg_templets_skin/}/stylesheets/main.css" rel="stylesheet" />
+<link href="{dede:global.cfg_templets_skin/}/stylesheets/slimbox2.css" rel="stylesheet" />
+<script type="text/javascript" src="/templets/default/scripts/jquery.js"></script>
+<script type="text/javascript" src="/templets/default/scripts/slimbox2.js"></script>
+<script type="text/javascript" src="/templets/default/scripts/loadp.js"></script>
+</head>
+<body class="gh">
+<div id="wrapper">
+{dede:include filename="header.htm"/}
+	<div class="clear"></div>
+	<div class="navbar">
+		{dede:field name='position'/}
+	</div>
+	<div class="clear"></div>
+	<div class="procon mt10px">
+		<div class="pc1">
+			<div class="pcon">
+				<div class="pcy">服务与支持</div>
+{dede:include filename="support_left_sider.htm"/}
+			</div>
+		</div>
+		<div class="pc2x">
+			<h3 class="pc2tl">
+				服务与支持
+			</h3>
+			<div class="pc2hr2"></div>
+			<div class="ser_sup mt10px">
+				<div class="ser_sup_1">
+					<h4>服务支持 SERVICE SUPPORT</h4>
+					在这里我们将为您提供专业的服务与支持，祝您使用愉快。
+				</div>
+				<div class="ser_sup_2">
+					<div class="ssicon1"></div>
+					<a href="service-center/">客户中心</a>
+					提供全能产品相关的服务信息
+				</div>
+				<div class="ser_sup_3">
+					<div class="ssicon2"></div>
+					<a href="manual/">使用说明</a>
+					提供关于产品使用的相关说明及下载服务
+				</div>
+				<div class="ser_sup_4">
+					<div class="ssicon3"></div>
+					<a href="faq/">常见问题</a>
+					提供产品常用问题的解决办法
+				</div>
+				<div class="ser_sup_5">
+					<div class="ssicon4"></div>
+					<a href="knowledge/">产品知识</a>
+					介绍与产品相关的各方面知识
+				</div>
+			</div>
+			<div class="ser_sup_cols mt10px">
+{dede:php}
+global $dsql;
+echo "<div class=\"sscol lcol\">
+<div class=\"chead\">产品知识</div>
+<table>
+<tbody>";
+$dsql->SetQuery("SELECT * FROM `#@__archives` WHERE `typeid` IN(41) ORDER BY `sortrank` DESC LIMIT 0,5");
+$dsql->Execute();
+while($row=$dsql->GetArray()) {
+$article=GetOneArchive($row['id']);
+echo "<tr><td><a href=\"".$article['arcurl']."\" title=\"".$article['title']."\">".$article['title']."</a></td><td>".date('Y-m-d',$article['pubdate'])."</td></tr>";
+}
+echo "</tbody></table></div>\n";
+
+echo "<div class=\"sscol rcol\">
+<div class=\"chead\">使用说明</div>
+<table>
+<!--
+<thead><tr><th class=\"th1\">产品名称</th><th class=\"th2\">下载</th></tr></thead>
+-->
+<tbody>
+<tr><td>新皇冠</td><td><a class=\"dlicon\" href=\"http://www.qnn.com.cn/cpsm/hg-sm.zip\">下载</a></td></tr>
+<tr><td>蓝精灵</td><td><a class=\"dlicon\" href=\"http://www.qnn.com.cn/cpsm/bgx-sm.zip\">下载</a></td></tr>
+<tr><td>可拉柜</td><td><a class=\"dlicon\" href=\"http://www.qnn.com.cn/cpsm/kl-sm.zip\">下载</a></td></tr>
+<tr><td>GLF高尔夫</td><td><a class=\"dlicon\" href=\"http://www.qnn.com.cn/cpsm/glf-sm.zip\">下载</a></td></tr>
+<tr><td>GTX钢铁侠</td><td><a class=\"dlicon\" href=\"http://www.qnn.com.cn/cpsm/gtx-sm.zip\">下载</a></td></tr>
+<!--
+<tr><td>TGG铁金刚</td><td><a class=\"dlicon\" href=\"http://www.qnn.com.cn/cpsm/tgg-sm.zip\">下载</a></td></tr>
+<tr><td>SJB铁管家</td><td><a class=\"dlicon\" href=\"http://www.qnn.com.cn/cpsm/sjb-sm.zip\">下载</a></td></tr>
+<tr><td>FG钢将军</td><td><a class=\"dlicon\" href=\"http://www.qnn.com.cn/cpsm/fg-sm.zip\">下载</a></td></tr>
+<tr><td>金刚锁</td><td><a class=\"dlicon\" href=\"http://www.qnn.com.cn/cpsm/jgs-sm.zip\">下载</a></td></tr>
+-->
+</tbody>
+</table>
+</div>\n";
+{/dede:php}
+			</div>
+		</div>
+	</div>
+	<div class="clear"></div>
+{dede:include filename="footer.htm"/}
+</div>
+</body>
+<!--Design: 8HTML.com-->
+</html>

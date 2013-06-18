@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie6"><![endif]-->
+<!--[if IE 7 ]><html class="ie7"><![endif]-->
+<!--[if IE 8 ]><html class="ie8"><![endif]-->
+<!--[if IE 9 ]><html class="ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html><!--<![endif]-->
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<title>{dede:field.seotitle /}-服务与支持-全能保险柜官网</title>
+<meta name="viewport" content="width=device-width, initial-scale=0.75" />
+<meta name="keywords" content="{dede:field.keywords/}" />
+<meta name="description" content="{dede:field.description/}" />
+<link href="{dede:global.cfg_templets_skin/}/stylesheets/main.css" rel="stylesheet" />
+<link href="{dede:global.cfg_templets_skin/}/stylesheets/slimbox2.css" rel="stylesheet" />
+<script type="text/javascript" src="/templets/default/scripts/jquery.js"></script>
+<script type="text/javascript" src="/templets/default/scripts/slimbox2.js"></script>
+<script type="text/javascript" src="/templets/default/scripts/loadp.js"></script>
+</head>
+<body class="gh">
+<div id="wrapper">
+{dede:include filename="header.htm"/}
+	<div class="clear"></div>
+	<div class="navbar">
+		{dede:field name='position'/}
+	</div>
+	<div class="clear"></div>
+	<div class="procon mt10px">
+		<div class="pc1">
+			<div class="pcon">
+				<div class="pcy">服务与支持</div>
+{dede:include filename="support_left_sider.htm"/}
+			</div>
+		</div>
+<div class="pc2x">
+<h3 class="pc2tl">{dede:field.seotitle /}</h3>
+<div class="pc2hr2"></div>
+{dede:field.content/}
+<div class="clear"></div>
+			<div class="mt10px">
+				<div class="sbh">热销产品</div>
+				<div class="sbc sbc_hot2 sbc_e">
+					<ul>
+					{dede:php}
+global $dsql;
+$dsql->SetQuery("SELECT id FROM `#@__arctype` WHERE `topid`=12");
+$dsql->Execute();
+$bT=array();
+while($row=$dsql->GetArray()) {
+	$bT[]=$row['id'];
+}
+
+$dsql->SetQuery("SELECT * FROM `#@__archives` WHERE `typeid` IN(".implode(',',$bT).") ORDER BY RAND() LIMIT 0,4");
+$dsql->Execute();
+while($row=$dsql->GetArray()) {
+$article=GetOneArchive($row['id']);
+echo "<li><a href=\"".$article['arcurl']."\" title=\"".$article['title']."\"><img src=\"".$article['litpic']."\" width=\"160\" height=\"160\" /><br />".mb_substr($article['title'], 0, 30, 'UTF-8')."</a></li>\n";
+}
+					{/dede:php}
+					</ul>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="clear"></div>
+{dede:include filename="footer.htm"/}
+</div>
+</body>
+<!--Design: 8HTML.com-->
+</html>

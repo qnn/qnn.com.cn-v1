@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie6"><![endif]-->
+<!--[if IE 7 ]><html class="ie7"><![endif]-->
+<!--[if IE 8 ]><html class="ie8"><![endif]-->
+<!--[if IE 9 ]><html class="ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html><!--<![endif]-->
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<title>{dede:field.title/}-全能保险柜官网</title>
+<meta name="keywords" content="{dede:field.keywords/}" />
+<meta name="description" content="{dede:field.description/}" />
+<meta name="viewport" content="width=device-width, initial-scale=0.75" />
+<link href="{dede:global.cfg_templets_skin/}/stylesheets/main.css" rel="stylesheet" />
+<script type="text/javascript" src="/templets/default/scripts/jquery.js"></script>
+<script type="text/javascript" src="/templets/default/scripts/jwplayer.js"></script>
+<script type="text/javascript" src="/templets/default/scripts/loadp.js"></script>
+</head>
+<body class="gh">
+<div id="wrapper" style="height: 800px;">
+{dede:include filename="header.htm"/}
+	<div class="clear"></div>
+	<div class="navbar">
+		{dede:field name='position'/}
+	</div>
+	<div class="clear"></div>
+	<div class="procon">
+{dede:include filename="about_left_sider.htm"/}
+		<div class="px2">
+			<div class="newsbarbox">
+				<img src="/images/qnnvidcenter.png" width="828" height="221" />
+			</div>
+			<div class="newscontent mt10px">
+				<div class="newsnav">
+				{dede:php}
+				global $dsql;
+				$dsql->SetQuery("SELECT id,title FROM `#@__archives` WHERE `typeid`=".$refObj->Fields['typeid']." ORDER BY sortrank DESC");
+				$dsql->Execute();
+				$cols=array();
+				while($row=$dsql->GetArray()) {
+					$cols[]=$row;
+				}
+				reset($cols);
+				$cur=current($cols);
+				while($cur['id']!=$refObj->Fields['id']){$cur=next($cols);}
+				$cur=prev($cols);
+				if ($cur!==FALSE) {
+				$article=GetOneArchive($cur['id']);
+				echo "<div class=\"right\">下一篇：<a href=\"".$article['arcurl']."\">".$article['title']." &raquo;</a></div>";
+				$cur=next($cols);
+				}else{
+				reset($cols);
+				echo "<div class=\"right\">下一篇：没有了</div>";
+				}
+				$cur=next($cols);
+				if ($cur!==FALSE) {
+				$article=GetOneArchive($cur['id']);
+				echo "<div class=\"left\">上一篇：<a href=\"".$article['arcurl']."\">&laquo; ".$article['title']."</a></div>";
+				} else {
+				echo "<div class=\"left\">上一篇：没有了</div>";
+				}
+				{/dede:php}
+				<div class="clear"></div>
+				</div>
+				<div class="newshead">
+					<h2>{dede:field.title/}</h2>
+					<em>{dede:field.pubdate function="MyDate('Y-m-d H:i:s', @me)"/}</em>
+				</div>
+				<div class="newsbody">
+					{dede:field.body/}
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="clear"></div>
+{dede:include filename="footer.htm"/}
+</div>
+</body>
+<!--Design: 8HTML.com-->
+</html>

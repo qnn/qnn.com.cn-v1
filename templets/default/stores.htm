@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie6"><![endif]-->
+<!--[if IE 7 ]><html class="ie7"><![endif]-->
+<!--[if IE 8 ]><html class="ie8"><![endif]-->
+<!--[if IE 9 ]><html class="ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html><!--<![endif]-->
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<title>保险柜{dede:field.title/}-全能保险柜官网</title>
+<meta name="keywords" content="{dede:field.keywords/}" />
+<meta name="description" content="{dede:field.description/}" />
+<meta name="viewport" content="width=device-width, initial-scale=0.75" />
+<link href="{dede:global.cfg_templets_skin/}/stylesheets/main.css" rel="stylesheet" />
+<script type="text/javascript" src="/templets/default/scripts/jquery.js"></script>
+<script type="text/javascript" src="/templets/default/scripts/loadp.js"></script>
+</head>
+<body class="gh">
+<div id="wrapper" style="height: 800px;">
+{dede:include filename="header.htm"/}
+	<div class="clear"></div>
+	<div class="navbar">
+		{dede:field name='position'/}
+	</div>
+	<div class="clear"></div>
+	<div><img src="/images/network.jpg" width="1000" height="400" /></div>
+	<div class="clear"></div>
+	<div class="procon exte">
+		<div class="ctrl">
+			<h3>查找离您最近的经销商和维修网点</h3>
+			省：<select id="province"><option value="">请选择</option></select>
+			市：<select id="city"><option value="">请选择</option></select>
+		</div>
+		<table id="storeslist">
+			<thead>
+				<tr>
+					<th>网点名称</th>
+					<th width="5%">省</th>
+					<th width="5%">市</th>
+					<th width="5%">区</th>
+					<th>地址</th>
+					<th>区号</th>
+					<th>联系电话</th>
+					<th>联系人</th>
+					<th>邮政编号</th>
+					<th width="5%">备注</th>
+				</tr>
+			</thead>
+			<tbody></tbody>
+		</table>
+	</div>
+	<div class="clear"></div>
+{dede:include filename="footer.htm"/}
+</div>
+<script>
+function sort_unique(c){for(var c=c.sort(function(b,a){return b.localeCompare(a)}),a=[c[0]],b=1;b<c.length;b++)c[b-1]!==c[b]&&a.push(c[b]);return a}$.fn.setDropDownValue=function(c){if(this[0].options&&0!=this[0].options.length)if($.browser.msie&&6==$.browser.version){for(var a="",b=0;b<this[0].options.length;b++){var e=$(this[0].options[b]),a=a+('<option value="'+$(e).val()+'"');e.val()==c&&(a+=" selected");a+=">"+e.html()+"</option>"}$(this).html(a)}else this.val(c)};
+$(function(){$.getJSON("/stores.json?"+Math.random(),function(c){var a=[];"undefined"!==typeof console&&console.log("js code by caiguanhao (8html.com)");$.each(c,function(b,c){a.push(c[1])});a=sort_unique(a);$.each(a,function(b,a){$("<option />",{text:a,value:a}).appendTo("#province")});$("#province").bind("change",function(){$("#city").empty().append('<option value="">\u8bf7\u9009\u62e9</option>');$("#storeslist tbody").empty();var b=$(this).val();if(""!=b){var a=[],d=[];$.each(c,function(c,f){f[1]==b&&(d.push(f[2]),
+a.push(f))});d=sort_unique(d);$.each(d,function(b,a){$("<option />",{text:a,value:a}).appendTo("#city")});$.each(a,function(a,b){var c=$("<tr />");$.each(b,function(b,a){$("<td />",{text:a}).appendTo(c)});$("#storeslist tbody").append(c)})}});$("#city").bind("change",function(){var a=$(this).val();if(""==a)$("#province").trigger("change");else{var b=[];$.each(c,function(c,g){g[2]==a&&b.push(g)});$("#storeslist tbody").empty();$.each(b,function(a,b){var c=$("<tr />");$.each(b,function(b,a){$("<td />",
+{text:a}).appendTo(c)});$("#storeslist tbody").append(c)})}});var b=location.hash;b&&1<b.length&&(b=b.substr(1),""!=b.split("-")[0]&&($("#province").setDropDownValue(b.split("-")[0]),$("#province").trigger("change"),b.split("-")[1]&&($("#city").setDropDownValue(b.split("-")[1]),$("#city").trigger("change"))))})});
+</script>
+</body>
+<!--Design: 8HTML.com-->
+</html>
